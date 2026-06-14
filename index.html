@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Radio AI Polska</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500..900&family=Inter:wght@400;500;600&display=swap');
+
+  :root{
+    --cream:#f2efe9;
+    --cream2:#e8e4dc;
+    --ink:#161513;
+    --ink2:#211f1d;
+    --gold:#b8a888;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--cream);color:var(--ink);font-family:'Inter',sans-serif;overflow-x:hidden;}
+
+  /* ── NAV ── */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:200;
+    display:flex;justify-content:space-between;align-items:center;
+    padding:22px 6vw;
+    background:rgba(22,21,19,0.85);
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+    border-bottom:1px solid rgba(244,237,225,0.07);
+  }
+  .logo{font-family:'Fraunces',serif;font-weight:800;font-size:18px;color:var(--cream);letter-spacing:0.3px;}
+  .navlinks{display:flex;gap:28px;font-size:14px;}
+  .navlinks a{color:rgba(244,237,225,0.7);text-decoration:none;transition:color .2s;}
+  .navlinks a:hover{color:var(--cream);}
+  .burger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:6px;}
+  .burger span{display:block;width:24px;height:2px;background:var(--gold);border-radius:2px;transition:transform .3s,opacity .3s;}
+  .mobile-menu{
+    position:fixed;top:0;left:0;right:0;bottom:0;z-index:190;
+    background:var(--ink2);
+    display:flex;flex-direction:column;justify-content:center;align-items:center;gap:32px;
+    font-family:'Fraunces',serif;font-size:28px;
+    transform:translateY(-100%);transition:transform .4s ease;
+  }
+  .mobile-menu.open{transform:translateY(0);}
+  .mobile-menu a{color:var(--cream);text-decoration:none;}
+  @media(max-width:700px){.navlinks{display:none;}.burger{display:flex;}}
+
+  /* ── HERO ── */
+  .hero{
+    min-height:100vh;
+    display:flex;flex-direction:column;justify-content:center;
+    padding:100px 6vw 80px;
+    background:var(--ink);color:var(--cream);
+    position:relative;overflow:hidden;
+  }
+  .blob{position:absolute;border-radius:50%;filter:blur(90px);opacity:0.3;pointer-events:none;z-index:0;}
+  .blob1{width:480px;height:480px;background:radial-gradient(circle,var(--gold),transparent 70%);top:-140px;right:-80px;animation:f1 18s ease-in-out infinite;}
+  .blob2{width:360px;height:360px;background:radial-gradient(circle,rgba(244,237,225,0.5),transparent 70%);bottom:-100px;left:-60px;animation:f2 22s ease-in-out infinite;}
+  @keyframes f1{0%,100%{transform:translate(0,0) scale(1);}50%{transform:translate(-50px,35px) scale(1.12);}}
+  @keyframes f2{0%,100%{transform:translate(0,0) scale(1);}50%{transform:translate(40px,-25px) scale(1.08);}}
+
+  .eyebrow{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:22px;position:relative;z-index:1;}
+  .hero h1{
+    font-family:'Fraunces',serif;font-weight:800;
+    font-size:clamp(52px,11vw,140px);
+    line-height:1;letter-spacing:-2px;
+    position:relative;z-index:1;
+  }
+  .hero h1 em{font-style:italic;font-weight:500;color:var(--gold);}
+  .hero p{
+    max-width:500px;margin-top:28px;font-size:16px;line-height:1.75;
+    color:rgba(244,237,225,0.65);position:relative;z-index:1;
+  }
+  .hero-actions{margin-top:40px;display:flex;gap:14px;flex-wrap:wrap;position:relative;z-index:1;}
+
+  /* ── MINI PLAYER vbudowany w hero ── */
+  .hero-player{
+    position:relative;z-index:1;
+    margin-top:48px;
+    max-width:420px;
+    background:rgba(244,237,225,0.06);
+    border:1px solid rgba(244,237,225,0.12);
+    border-radius:20px;
+    padding:20px 24px;
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+  }
+  .hp-top{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+  .hp-dot{width:8px;height:8px;border-radius:50%;background:#7df9c0;box-shadow:0 0 0 0 rgba(125,249,192,0.6);animation:pulse 2s infinite;flex-shrink:0;}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(125,249,192,0.5);}70%{box-shadow:0 0 0 7px rgba(125,249,192,0);}100%{box-shadow:0 0 0 0 rgba(125,249,192,0);}}
+  .hp-info{flex:1;min-width:0;}
+  .hp-title{font-family:'Fraunces',serif;font-size:15px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .hp-sub{font-size:11px;color:rgba(244,237,225,0.5);margin-top:2px;}
+  .hp-play{
+    width:40px;height:40px;border-radius:50%;background:var(--cream);color:var(--ink);
+    border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;
+    transition:background .2s,transform .15s;
+  }
+  .hp-play:hover{background:var(--gold);transform:scale(1.05);}
+  .hp-progress{height:3px;background:rgba(244,237,225,0.12);border-radius:3px;overflow:hidden;}
+  .hp-bar{height:100%;width:0%;background:linear-gradient(90deg,#7df9c0,var(--gold));border-radius:3px;transition:width .5s linear;}
+  .hp-times{display:flex;justify-content:space-between;font-size:10px;color:rgba(244,237,225,0.4);margin-top:6px;}
+
+  /* ── BUTTONS ── */
+  .btn{
+    font-family:'Inter',sans-serif;font-weight:600;font-size:14px;
+    padding:14px 28px;border-radius:100px;
+    border:1px solid var(--cream);background:var(--cream);color:var(--ink);
+    cursor:pointer;text-decoration:none;
+    display:inline-flex;align-items:center;gap:9px;
+    transition:all .22s ease;
+  }
+  .btn:hover{background:var(--gold);border-color:var(--gold);transform:translateY(-2px);}
+  .btn.ghost{background:transparent;color:var(--cream);}
+  .btn.ghost:hover{background:rgba(244,237,225,0.08);}
+
+  /* ── REVEAL ── */
+  .reveal{opacity:0;transform:translateY(36px);transition:opacity .8s ease,transform .8s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  /* ── SECTIONS ── */
+  section{padding:100px 6vw;}
+  .section-head{margin-bottom:56px;}
+  .section-head h2{font-family:'Fraunces',serif;font-weight:700;font-size:clamp(32px,5vw,60px);line-height:1.08;}
+  .section-head p{max-width:440px;color:#706860;font-size:15px;line-height:1.7;margin-top:14px;}
+
+  /* ── STATS ── */
+  .statswow{background:var(--ink);color:var(--cream);}
+  .statswow .section-head h2{color:var(--cream);}
+  .statswow-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(244,237,225,0.08);border:1px solid rgba(244,237,225,0.08);border-radius:20px;overflow:hidden;margin-top:0;}
+  .stat-box{background:var(--ink2);padding:48px 36px;}
+  .stat-box .num{font-family:'Fraunces',serif;font-weight:800;font-size:clamp(44px,7vw,88px);line-height:1;color:var(--gold);}
+  .stat-box .label{margin-top:10px;font-size:13px;color:rgba(244,237,225,0.5);letter-spacing:1px;text-transform:uppercase;}
+
+  /* ── HOW ── */
+  .how{background:var(--cream);}
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(21,18,15,0.1);border:1px solid rgba(21,18,15,0.1);border-radius:20px;overflow:hidden;}
+  .step{background:var(--cream);padding:44px 32px;transition:transform .3s,background .3s;}
+  .step:hover{transform:translateY(-6px);background:var(--cream2);}
+  .step .num{font-family:'Fraunces',serif;font-weight:800;font-size:44px;color:var(--gold);margin-bottom:20px;display:block;transition:transform .3s;}
+  .step:hover .num{transform:scale(1.08);}
+  .step h3{font-family:'Fraunces',serif;font-size:22px;font-weight:700;margin-bottom:10px;}
+  .step p{color:#706860;font-size:14px;line-height:1.7;}
+
+  /* ── CTA ── */
+  .cta{background:var(--cream);text-align:center;padding:140px 6vw 160px;}
+  .cta h2{font-family:'Fraunces',serif;font-weight:800;font-size:clamp(36px,7vw,88px);line-height:1.05;margin-bottom:36px;}
+  .cta h2 em{font-style:italic;color:var(--gold);font-weight:500;}
+  .cta .btn{box-shadow:0 0 0 0 rgba(184,168,136,0.4);animation:glow 2.5s infinite;}
+  @keyframes glow{0%{box-shadow:0 0 0 0 rgba(184,168,136,0.4);}70%{box-shadow:0 0 0 20px rgba(184,168,136,0);}100%{box-shadow:0 0 0 0 rgba(184,168,136,0);}}
+
+  /* ── FOOTER ── */
+  footer{background:var(--ink);color:rgba(244,237,225,0.45);padding:44px 6vw;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;font-size:13px;}
+  footer .logo{color:var(--cream);}
+
+  /* ── MOBILE ── */
+  @media(max-width:700px){
+    .hero{padding:90px 6vw 60px;}
+    .hero h1{letter-spacing:-1px;}
+    .hero p{font-size:15px;}
+    .hero-player{margin-top:36px;}
+    section{padding:70px 6vw;}
+    .statswow-grid{grid-template-columns:1fr;}
+    .stat-box{padding:36px 24px;}
+    .steps{grid-template-columns:1fr;}
+    .step{padding:32px 24px;}
+    .cta{padding:90px 6vw 110px;}
+    footer{flex-direction:column;align-items:flex-start;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">Radio AI Polska</div>
+  <div class="navlinks">
+    <a href="/">Strona główna</a>
+    <a href="radio-ai-polska.html">Odtwarzacz</a>
+    <a href="o-nas.html">O nas</a>
+  </div>
+  <button class="burger" id="burgerBtn" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mmenu">
+  <a href="index.html" onclick="closeMMenu()">Strona główna</a>
+  <a href="radio-ai-polska.html" onclick="closeMMenu()">Odtwarzacz</a>
+  <a href="o-nas.html" onclick="closeMMenu()">O nas</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+
+  <div class="eyebrow">24 / 7 · muzyka generowana przez AI</div>
+  <h1>Muzyka, której<br>nikt jeszcze<br><em>nie usłyszał.</em></h1>
+  <p>Radio AI Polska gra utwory skomponowane od pierwszej do ostatniej nuty przez sztuczną inteligencję — bez reklam, bez powtórek, non-stop.</p>
+
+  <div class="hero-actions">
+    <a href="radio-ai-polska.html" class="btn">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+      Słuchaj teraz
+    </a>
+    <a href="#how" class="btn ghost">Jak to działa</a>
+  </div>
+
+</section>
+
+<!-- HOW -->
+<section class="how reveal" id="how">
+  <div class="section-head">
+    <h2>Jak działa<br>Radio AI Polska</h2>
+    <p>Trzy kroki, które dzieją się bez przerwy, dwadzieścia cztery godziny na dobę.</p>
+  </div>
+  <div class="steps">
+    <div class="step"><span class="num">01</span><h3>Komponowanie</h3><p>Modele AI piszą melodię, tekst i aranżację od zera — w stylach od popu do ambientu.</p></div>
+    <div class="step"><span class="num">02</span><h3>Produkcja</h3><p>Każdy utwór jest miksowany i masterowany automatycznie, w jakości gotowej do emisji.</p></div>
+    <div class="step"><span class="num">03</span><h3>Emisja na żywo</h3><p>Nowe kompozycje trafiają na antenę w nieskończonej, samogenerującej się playliście.</p></div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta reveal">
+  <h2>Włącz radio<br>i posłuchaj<br><em>przyszłości.</em></h2>
+  <a href="radio-ai-polska.html" class="btn">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+    Otwórz odtwarzacz
+  </a>
+</section>
+
+<footer>
+  <div class="logo">Radio AI Polska</div>
+  <div>© 2026 · Cała muzyka generowana przez AI</div>
+</footer>
+
+<script>
+  // Mobile menu
+  function closeMMenu(){ document.getElementById('mmenu').classList.remove('open'); }
+  document.getElementById('burgerBtn').addEventListener('click', () => {
+    document.getElementById('mmenu').classList.toggle('open');
+  });
+
+  // Scroll reveal
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+</script>
+
+</body>
+</html>

@@ -1,1 +1,1 @@
-# Radio-Ai-Polska
+base domain == radioaipolska.pl

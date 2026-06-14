@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>O nas — Radio AI Polska</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500..900&family=Inter:wght@400;500;600&display=swap');
+
+  :root{
+    --cream:#f2efe9;
+    --cream2:#e6e2d9;
+    --ink:#161513;
+    --ink2:#211f1d;
+    --gold:#b8a888;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:var(--ink);
+    color:var(--cream);
+    font-family:'Inter',sans-serif;
+    overflow-x:hidden;
+  }
+
+  nav{
+    position:fixed; top:0; left:0; right:0;
+    display:flex; justify-content:space-between; align-items:center;
+    padding:24px 6vw;
+    z-index:100;
+    mix-blend-mode:difference;
+    color:#fff;
+  }
+  .logo{
+    font-family:'Fraunces',serif;
+    font-weight:800;
+    font-size:20px;
+    letter-spacing:0.5px;
+  }
+  .navlinks{ display:flex; gap:32px; font-size:14px; }
+  .navlinks a{ color:inherit; text-decoration:none; }
+  @media (max-width:700px){ .navlinks{ display:none; } }
+
+  .burger{
+    display:none;
+    flex-direction:column;
+    gap:5px;
+    cursor:pointer;
+    background:none;
+    border:none;
+    padding:8px;
+  }
+  .burger span{
+    display:block;
+    width:26px;
+    height:2px;
+    background:var(--gold);
+    border-radius:2px;
+  }
+  @media (max-width:700px){ .burger{ display:flex; } }
+
+  .mobile-menu{
+    position:fixed;
+    top:0; left:0; right:0;
+    background:var(--ink2);
+    color:var(--cream);
+    padding:90px 6vw 30px;
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+    font-size:20px;
+    transform:translateY(-100%);
+    transition:transform 0.35s ease;
+    z-index:99;
+    font-family:'Fraunces',serif;
+  }
+  .mobile-menu.open{ transform:translateY(0); }
+  .mobile-menu a{ color:var(--cream); text-decoration:none; }
+
+  /* HERO */
+  .hero{
+    min-height:60vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    padding:0 6vw;
+    background:var(--ink);
+    color:var(--cream);
+    position:relative;
+    overflow:hidden;
+  }
+  .hero::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:radial-gradient(ellipse 60% 50% at 80% 20%, rgba(184,168,136,0.16), transparent 60%);
+  }
+  .eyebrow{
+    font-size:13px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:20px;
+    position:relative; z-index:1;
+  }
+  .hero h1{
+    font-family:'Fraunces',serif;
+    font-weight:800;
+    font-size:clamp(48px, 9vw, 110px);
+    line-height:1;
+    letter-spacing:-2px;
+    position:relative; z-index:1;
+  }
+  .hero h1 em{
+    font-style:italic;
+    font-weight:500;
+    color:var(--gold);
+  }
+
+  /* SECTIONS */
+  section{ padding:100px 6vw; }
+  .lede{
+    max-width:720px;
+    font-family:'Fraunces',serif;
+    font-size:clamp(24px,3.4vw,38px);
+    line-height:1.5;
+    font-weight:500;
+  }
+  .lede em{ font-style:italic; color:var(--gold); }
+
+  .grid2{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:60px;
+    margin-top:80px;
+  }
+  @media (max-width:800px){ .grid2{ grid-template-columns:1fr; gap:40px; } }
+  .grid2 h3{
+    font-family:'Fraunces',serif;
+    font-weight:700;
+    font-size:26px;
+    margin-bottom:14px;
+  }
+  .grid2 p{
+    color:rgba(244,237,225,0.65);
+    font-size:15px;
+    line-height:1.8;
+  }
+
+  /* STATS */
+  .stats{
+    background:var(--ink);
+    color:var(--cream);
+  }
+  .stats-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1px;
+    background:rgba(244,237,225,0.1);
+    border:1px solid rgba(244,237,225,0.1);
+    border-radius:24px;
+    overflow:hidden;
+  }
+  .stat{
+    background:var(--ink2);
+    padding:48px 36px;
+  }
+  .stat .num{
+    font-family:'Fraunces',serif;
+    font-weight:800;
+    font-size:56px;
+    color:var(--gold);
+    margin-bottom:10px;
+  }
+  .stat p{ color:rgba(244,237,225,0.55); font-size:14px; line-height:1.6; }
+  @media (max-width:800px){ .stats-grid{ grid-template-columns:1fr; } }
+
+  /* MANIFESTO */
+  .manifesto{ text-align:center; }
+  .manifesto h2{
+    font-family:'Fraunces',serif;
+    font-weight:800;
+    font-size:clamp(36px,7vw,80px);
+    line-height:1.1;
+    max-width:900px;
+    margin:0 auto;
+  }
+  .manifesto h2 em{ font-style:italic; color:var(--gold); font-weight:500; }
+
+  /* CTA */
+  .cta{
+    text-align:center;
+    padding:140px 6vw 160px;
+  }
+  .btn{
+    font-family:'Inter',sans-serif;
+    font-weight:600;
+    font-size:15px;
+    padding:16px 32px;
+    border-radius:100px;
+    border:1px solid var(--ink);
+    background:var(--ink);
+    color:var(--cream);
+    cursor:pointer;
+    text-decoration:none;
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    transition:all 0.25s ease;
+  }
+  .btn:hover{ background:var(--gold); border-color:var(--gold); color:var(--ink); transform:translateY(-2px); }
+
+  footer{
+    background:var(--ink);
+    color:rgba(244,237,225,0.5);
+    padding:48px 6vw;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:16px;
+    font-size:13px;
+  }
+  footer .logo{ color:var(--cream); }
+
+  @media (max-width:700px){
+    .hero{ min-height:50vh; padding:90px 6vw 40px; }
+    section{ padding:60px 6vw; }
+    .lede{ font-size:22px; }
+    .grid2{ margin-top:50px; gap:36px; }
+    .stat{ padding:36px 24px; }
+    .stat .num{ font-size:42px; }
+    .cta{ padding:80px 6vw 100px; }
+    footer{ flex-direction:column; align-items:flex-start; text-align:left; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">Radio AI Polska</div>
+  <div class="navlinks">
+    <a href="index.html">Strona główna</a>
+    <a href="radio-ai-polska.html">Odtwarzacz</a>
+    <a href="o-nas.html">O nas</a>
+  </div>
+  <button class="burger" onclick="document.getElementById('mmenu').classList.toggle('open')" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mmenu">
+  <a href="index.html">Strona główna</a>
+  <a href="radio-ai-polska.html">Odtwarzacz</a>
+  <a href="o-nas.html">O nas</a>
+</div>
+
+<section class="hero">
+  <div class="eyebrow">O stacji</div>
+  <h1>Robimy radio<br>na <em>nowo.</em></h1>
+</section>
+
+<section>
+  <p class="lede">Radio AI Polska to stacja, na której każdy utwór — melodia, tekst, aranżacja i miks — powstaje od zera, skomponowany przez sztuczną inteligencję. <em>Bez playlist z wytwórni, bez powtórek, bez reklam.</em></p>
+
+  <div class="grid2">
+    <div>
+      <h3>Dlaczego to robimy</h3>
+      <p>Wierzymy, że muzyka może być eksperymentem, a nie produktem. Nasza stacja gra utwory, które nie istniały minutę temu — nowe brzmienia, nowe nastroje, nowe historie, generowane na żywo i emitowane bez przerwy.</p>
+    </div>
+    <div>
+      <h3>Jak to powstaje</h3>
+      <p>Modele AI komponują muzykę i teksty w wielu stylach — od popu i ambientu po lo-fi i akustyczne ballady. Każdy utwór jest automatycznie miksowany i masterowany, a następnie trafia na żywą antenę.</p>
+    </div>
+  </div>
+</section>
+
+<section class="stats">
+  <div class="stats-grid">
+    <div class="stat">
+      <div class="num">24/7</div>
+      <p>Nieprzerwana emisja, każdego dnia, bez wyjątku.</p>
+    </div>
+    <div class="stat">
+      <div class="num">0</div>
+      <p>Reklam i słabych piosenek.</p>
+    </div>
+    <div class="stat">
+      <div class="num">∞</div>
+      <p>Nowych utworów — generowanych bez końca.</p>
+    </div>
+  </div>
+</section>
+
+<section class="manifesto">
+  <h2>Każda piosenka<br>jest <em>premierą.</em><br>Każde włączenie<br>radia to <em>pierwszy raz.</em></h2>
+</section>
+
+<section class="cta">
+  <a href="radio-ai-polska.html" class="btn">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+    Włącz radio
+  </a>
+</section>
+
+<footer>
+  <div class="logo">Radio AI Polska</div>
+  <div>© 2026 · Cała muzyka generowana przez AI</div>
+</footer>
+
+</body>
+</html>

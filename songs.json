@@ -1,0 +1,13 @@
+[
+  { "title": "Bez Twojej Mapy", "src": "songs/bez-twojej-mapy.mp3" },
+  { "title": "Dobry Dzień", "src": "songs/dobry-dzien.mp3" },
+  { "title": "Kubek Stygnie", "src": "songs/kubek-stygnie.mp3" },
+  { "title": "Światło po Deszczu", "src": "songs/swiatlo-po-deszczu.mp3" },
+  { "title": "Rutyna Dobrego Dnia", "src": "songs/zwykly-dobry-dzien.mp3" },
+
+  { "title": "Herbata w Chelsea", "src": "songs/Herbata w Chelsea.mp3" },
+  { "title": "Szklanka Nocy", "src": "songs/Szklanka Nocy.mp3" },
+  { "title": "Słońce w kieszeni", "src": "songs/Słońce w kieszeni.mp3" },
+
+  { "title": "Szary Jedwab", "src": "songs/szary-jedwab.mp3" }
+]
