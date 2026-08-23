@@ -1,11 +1,13 @@
 [
-  { "title": "Bez Twojej Mapy",      "src": "songs/bez-twojej-mapy.mp3"        },
-  { "title": "Dobry Dzień",          "src": "songs/dobry-dzien.mp3"            },
-  { "title": "Kubek Stygnie",        "src": "songs/kubek-stygnie.mp3"          },
-  { "title": "Światło po Deszczu",   "src": "songs/swiatlo-po-deszczu.mp3"     },
-  { "title": "Rutyna Dobrego Dnia",  "src": "songs/zwykly-dobry-dzien.mp3"     },
-  { "title": "Herbata w Chelsea",    "src": "songs/herbata-w-chelsea.mp3"      },
-  { "title": "Szklanka Nocy",        "src": "songs/szklanka-nocy.mp3"          },
-  { "title": "Where the Shadows Fall","src": "songs/where-the-shadows-fall.mp3"},
-  { "title": "Szary Jedwab",         "src": "songs/szary-jedwab.mp3"           }
+  { "title": "Bez Twojej Mapy",     "src": "songs/bez-twojej-mapy.mp3"       },
+  { "title": "Dobry Dzień",         "src": "songs/dobry-dzien.mp3"           },
+  { "title": "Herbata w Chelsea",   "src": "songs/Herbata w Chelsea.mp3"     },
+  { "title": "Kubek Stygnie",       "src": "songs/kubek-stygnie.mp3"         },
+  { "title": "Słońce w kieszeni",   "src": "songs/Slonce-w-kieszeni.mp3"     },
+  { "title": "Szklanka Nocy",       "src": "songs/Szklanka Nocy.mp3"         },
+  { "title": "Światło po Deszczu",  "src": "songs/swiatlo-po-deszczu.mp3"    },
+  { "title": "Szary Jedwab",        "src": "songs/szary-jedwab.mp3"          },
+  { "title": "W Twoim Kroku",       "src": "songs/W Twoim Kroku.mp3"         },
+  { "title": "Where the Shadows Fall","src": "songs/Where the Shadows Fall.mp3"},
+  { "title": "Rutyna Dobrego Dnia", "src": "songs/zwykly-dobry-dzien.mp3"    }
 ]
